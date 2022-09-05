@@ -108,8 +108,8 @@ func (rmq *RabbitMQ) CreateExchange(name string, kind string, durable bool, auto
 	return nil
 }
 
-func (rmq *RabbitMQ) BindExchangeWithQueue(name string, key string, exchange string, noWait bool, args map[string]interface{}) error {
-	if err := rmq.channel.QueueBind(name, key, exchange, noWait, args); err != nil {
+func (rmq *RabbitMQ) BindQueueWithExchange(queueName string, key string, exchangeName string, noWait bool, args map[string]interface{}) error {
+	if err := rmq.channel.QueueBind(queueName, key, exchangeName, noWait, args); err != nil {
 		log.Error("Error when queue binding", err.Error())
 		return err
 	}
