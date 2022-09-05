@@ -1,4 +1,4 @@
-package rabbitmq_sdk
+package rabbitmqsdk
 
 import (
 	"github.com/labstack/gommon/log"
@@ -52,7 +52,7 @@ func (rmq *RabbitMQ) connect() error {
 	return nil
 }
 
-func (rmq *RabbitMQ) reconnect() error {
+func (rmq *RabbitMQ) reconnect() {
 	attempt := rmq.retryAttempt
 
 	for attempt != 0 {
@@ -62,14 +62,12 @@ func (rmq *RabbitMQ) reconnect() error {
 			log.Error("Rabbitmq retry connection error", err.Error())
 			continue
 		}
-		return nil
+		return
 	}
 
 	if attempt == 0 {
 		log.Fatal("Rabbitmq retry connection is failed")
 	}
-
-	return nil
 }
 
 func (rmq *RabbitMQ) Close() {
