@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+permissions:
+  contents: read
 jobs:
   golangci:
     name: lint
@@ -16,3 +18,4 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           version: v1.48
+          args: -c .golangci.yaml -v
